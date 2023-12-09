@@ -25,6 +25,9 @@ coordinates = {
 
 coordinates_schema = CoordinatesSchema()
 
+@app.route("/")
+def home():
+    return "Hello World!"
 
 @app.route('/api/coordinates', methods=['GET', 'POST'])
 def handle_coordinates():
