@@ -9,7 +9,7 @@ load_dotenv()
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
-
+manila_timezone = pytz.timezone('Asia/Manila')
 
 class CoordinatesSchema(Schema):
     latitude = fields.Float(required=True)
@@ -47,7 +47,8 @@ def handle_coordinates():
 
             data = coordinates_schema.load(request.json)
             coordinates.update(data)
-            coordinates['updated_at'] = datetime.now().isoformat()
+            manila_time = datetime.now(manila_timezone).isoformat()
+            coordinates['updated_at'] = manila_time
             return 'Coordinates updated successfully', 200
         except ValidationError as err:
             return str(err), 400
