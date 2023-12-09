@@ -41,7 +41,6 @@ def handle_coordinates():
     elif request.method == 'POST':
         try:
             secret_key = os.getenv('SECRET_KEY')
-            print(f"Loaded Secret Key: {secret_key}")
 
             if request.headers.get('Secret-Key') != secret_key:
                 return 'Unauthorized', 401
